@@ -46,3 +46,30 @@ client.run(my_secret)
 - Send a new message to the same channel where the message was received but in reverse
 - - `::-1` is to reverse a string or list in Python
 - NOTE: Make sure the non-client messages are unique, otherwise the bot will reverse EVERYTHING (even interfering with other bot messages)
+
+## Bot Life
+- Need to keep bot alive when Repl is running
+- Do so by creating a server to run it in a separate thread using the Flask framework
+```
+from flask import Flask
+from threading import Thread
+  
+app = Flask('')
+
+@app.route('/')
+def home():
+  return "I'm alive"
+
+def run():
+  app.run(host='0.0.0.0',port=8080)
+  
+def keep_alive():
+  t = Thread(target=run)
+  t.start
+```
+- Starts a web server that returns "I'm alive" if anyone visits it and provides metho to start in a new thread
+- Add import of server to top of `main.py` like so: `from keep_alive import keep_alive`
+- Call `keep_alive()` just before the secret token declaration
+- When you run again, you should see a new pane that shows the web output from the server
+- Flask will be listening for requests
+- May have to login to Repl to start the bot again (after long inactivity)

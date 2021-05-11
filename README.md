@@ -90,7 +90,7 @@ weather_temp = response.json()['main']['temp']
 
 ## Make Bot Respond to Messages
 - This will be a client.event
-- Check to see if the user's message is equal to the user's input (in this case it will be the commmand followed by a zipcode number)
+- Check to see if the user's message is equal to the user's input 
 - Protect again recursion to ensure that the bot sends the message to a normal user and not to itself--want to compare the author's message to the bot user (i.e. client.user)
 ```
 if message.author == client.user:
@@ -112,3 +112,26 @@ async def on_error(event, *args, **kwargs):
   else:
     raise
 ```
+
+## Bot Commands
+- Command is an object that wraps a function that is invooked by a text command
+- Starts with a  `command_prefix ` and defined by the Bot
+`bot = commands.Bot(command_prefix='!'`
+- Use `client.command` and pass the command name as the argument (e.g. `@bot.command(name='99')
+- The command the user inputs will be '!{command_name}' where command_name is the unique identifier
+- The callback function accepts on parameter which is the context surrounding the invoked Command
+- Example:
+```
+bot = commands.Bot(command_prefix='!')
+
+@bot.command(name='marco')
+async def marco(context):
+  response = 'polo!'
+  await context.send(response)
+```
+- Add a help message to give a clear description of what the command does when the user types of the help command:
+``` bot.command(name='marco', help='Responds with \'Polo\' when the user calls for Marco"
+```
+*** NOTE: This functionality only exists for the Bot subclass NOT for Client superclass ***
+
+## Converting Parameters

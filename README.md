@@ -87,3 +87,28 @@ response = requests.get(f'https://api.openweathermap.org/data/2.5/weather?zip=92
 weather_description = response.json()['weather'][0]['description']
 weather_temp = response.json()['main']['temp']
 ```
+
+## Make Bot Respond to Messages
+- This will be a client.event
+- Check to see if the user's message is equal to the user's input (in this case it will be the commmand followed by a zipcode number)
+- Protect again recursion to ensure that the bot sends the message to a normal user and not to itself--want to compare the author's message to the bot user (i.e. client.user)
+```
+if message.author == client.user:
+  return
+```
+
+## Handling Errors
+- Raise exceptions by calling `on_error`
+- `on_error` takes the event as the first argument (which will be  `on_message` in this case)
+- It also excepts `*args` and `**kwargs` which are flexible, positional, and keyword arguments
+- Handle the exception with a unique message by using `.write()` to format the string to the file  `err.log`
+- `on_message` takes one arg `message` so the first argument in the list should be the user's input
+```
+@client.event
+async def on_error(event, *args, **kwargs):
+  with open('err.log', 'a') as f:
+  if event == 'on_message':
+    f.write(f'Unhandled message: {args[0]}\n')
+  else:
+    raise
+```

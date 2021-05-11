@@ -73,3 +73,16 @@ def keep_alive():
 - When you run again, you should see a new pane that shows the web output from the server
 - Flask will be listening for requests
 - May have to login to Repl to start the bot again (after long inactivity)
+
+## API Implementation
+- Currently using [OpenWeatherMap API](https://openweathermap.org/current)
+- Be sure to sign up and get a free API key to use as a token
+- Make a 'GET' request:
+```
+response = requests.get(f'https://api.openweathermap.org/data/2.5/weather?zip=92108,us&appid={weather_api}')
+```
+- Select the correct endpoint:
+```
+weather_description = response.json()['weather'][0]['description']
+weather_temp = response.json()['main']['temp']
+```

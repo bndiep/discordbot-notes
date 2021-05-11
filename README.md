@@ -2,6 +2,7 @@
 
 ## Resources
 - [Building a Discord Bot with Python and Repl.it](https://www.codementor.io/@garethdwyer/building-a-discord-bot-with-python-and-repl-it-miblcwejz)
+- [How to Make a Discord Bot in Python](https://realpython.com/how-to-make-a-discord-bot-python/)
 
 ## Setting up Discord Bot in Repl.it
 - Python wrapper for Discord bot API exists on GitHub

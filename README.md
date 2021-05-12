@@ -130,8 +130,13 @@ async def marco(context):
   await context.send(response)
 ```
 - Add a help message to give a clear description of what the command does when the user types of the help command:
-``` bot.command(name='marco', help='Responds with \'Polo\' when the user calls for Marco"
+```
+bot.command(name="marco", help="Responds with 'Polo' when the user calls for Marco)
 ```
 *** NOTE: This functionality only exists for the Bot subclass NOT for Client superclass ***
-
-## Converting Parameters
+*** IMPORTANT: By using command decorators like the one above AND having an `on_message` event, you need the bot to process commands! You need this otherwise the commands WILL NOT TRIGGER. Save yourself the headache and change `on_message` to as follows:
+```
+@bot.event
+async def on_message(message):
+  await bot.process_commands(message)
+```
